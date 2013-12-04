@@ -1,0 +1,346 @@
+/******************************************************************
+Site Name:
+Author:
+
+Stylesheet: Main Stylesheet
+
+Here's where the magic happens. Here, you'll see we are calling in
+the separate media queries. The base mobile goes outside any query
+and is called at the beginning, after that we call the rest
+of the styles inside media queries.
+******************************************************************/
+
+
+//
+// IMPORTING STYLES
+//
+
+// import normalize
+@import "normalize";
+
+// import mixins
+@import "mixins";
+
+// import grid
+@import "grid";
+
+
+body {
+    background-color: $black;
+    // @include os-light;
+}
+
+.splash {
+    position: relative;
+    height: 1000px;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center center;
+    @include background-size(cover);
+    @extend .clearfix;
+
+
+    .splash-logo {
+        position: absolute;
+        top: 50%; left: 50%;
+        z-index: 10;
+        margin: -69px 0 0 -214px;
+
+        @include opacity(0.0);
+
+        @media (max-width: 768px) {
+            position: relative;
+            top: 50%; left: auto;
+            max-width: 90%;
+            margin: -50px auto 0;
+            display: block;
+        }
+    }
+
+    @media (max-width: 768px) {
+        height: 100%;        
+    }
+}
+
+.header {
+    background: $black;
+    padding: 25px 0 25px 0;
+    z-index: 10;
+
+    img {
+        display: block;
+        @media (max-width: 768px) {
+            margin: 0 auto 15px;
+        }        
+    }
+
+    &.fixed {
+        position: fixed;
+        top: 0; right: 0; left: 0;
+        width: 100%;
+    }
+
+    @media (max-width: 768px) {
+        padding: 25px 0 0 0;
+    }
+
+    .tencol {
+        @media (max-width: 768px) {
+            background: $brown;
+            padding-top: 8px;
+            padding-bottom: 8px;
+        }
+    }
+}
+
+.main-nav {
+    @extend .clearfix;
+    @media (max-width: 768px) {
+        width: 100%;                
+    }
+
+    a {
+        float: right;
+        font-size: 18px; line-height: 18px;
+        color: $white;
+        @include os-light;
+        letter-spacing: 2px;
+        margin-top: 10px;
+        margin-left: 50px;
+
+        @include transition(color 0.5s);
+
+        &:hover,
+        &.active {
+            color: $brown;
+
+            @media (max-width: 768px) {
+                color: $black;
+            }
+        }
+
+        @media (max-width: 768px) {
+            width: 25%;
+            text-align: center;
+            margin-top: 0;
+            margin-left: 0;
+
+            font-size: 14px; line-height: 14px;
+        }
+    }    
+}
+
+.store {
+    background: $white;
+    padding: 80px 0;
+
+    .coming-soon {
+        color: $black;
+        font-size: 18px; line-height: 600px;
+        @include os-light;
+        text-align: center;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+    }
+}
+
+.single-product {
+    h2 {
+        @include os-light;
+        color: $black;
+        font-size: 22px; line-height: 30px;
+        margin: 0; padding: 0;
+        position: relative;
+        z-index: 10;
+        letter-spacing: 3px;
+    }
+
+    select {
+        float: left;
+        clear: both;
+    }
+
+    .btn {
+        margin: 15px 0 0 0;
+        font-size: 14px; line-height: 18px;
+        display: inline-block;
+        padding: 5px 10px;
+        background: $black;
+        color: $white;
+        @include os-bold;
+        letter-spacing: 1px;
+        border: 0;
+        text-transform: uppercase;
+
+        float: left;
+        clear: both;
+
+        @include transition(all .5s);
+
+        &:hover {
+            background: $brown;
+            color: $white;
+        }
+    }
+}
+
+.product {
+    position: relative;
+    width: 33.3333%;
+    float: left;
+    display: inline-block;
+
+    @media (max-width: 768px) {
+        width: 100%;
+        clear: both;
+    }
+
+    > img {
+        display: block;
+        width: 100%;
+    }
+
+    .overlay {
+        position: absolute;
+        top: 0; right: 0; bottom: 0; left: 0;
+        z-index: 1;
+        
+        cursor: pointer;
+
+        @include opacity(0.0);
+        @include transition(opacity 0.5s);
+
+        .overlay-content {
+            z-index: 2;
+            padding: 130px 30px 0 30px;
+
+            h2 {
+                @include os-light;
+                color: $white;
+                font-size: 22px; line-height: 30px;
+                margin: 0; padding: 0;
+                position: relative;
+                z-index: 10;
+                letter-spacing: 3px;
+            }
+
+            .meta {
+                position: relative;
+                z-index: 10;
+                padding: 15px 0 0 0;
+
+                .price {
+                    color: $white;
+                    @include os-light-italic;
+                    font-size: 14px; line-height: 18px;
+                }
+
+                .detail-link {
+                    color: $white;                    
+                    @include os-bold;
+                    font-size: 14px; line-height: 18px;
+                    margin-left: 10px;
+                    letter-spacing: 1px;
+
+                    @include transition(color 0.5s);
+
+                    &:hover {
+                        color: $brown;
+                    }
+                }
+            }
+        }
+        .bg {
+            background: $black;
+            @include opacity(0.85);
+
+            position: absolute;
+            top: 0; right: 0; bottom: 0; left: 0;
+            z-index: 0;
+        }
+    }
+
+    &:hover {
+        .overlay {
+            @include opacity(1.0);
+        }
+    }
+}
+
+.about {
+    background: $white;
+
+    .about-image {
+        min-height: 500px;
+        background-image: url('http://www.keiyasui.com/sankichi/img/about_bg.jpg');
+        background-attachment: fixed;
+        background-position: center center;
+        @include background-size(cover);
+        @include box-shadow(inset 0px 20px 20px rgba(0,0,0,0.5));
+        
+        h2 {
+            font-size: 24px; line-height: 500px;
+            @include os-bold;
+            color: $white;
+            text-align: center;
+            font-weight: normal;
+            letter-spacing: 4px;
+
+            margin: 0; padding: 0;
+
+        }
+    }
+
+    .about-content {
+        padding: 80px 0;
+
+        p {
+            font-size: 18px; line-height: 28px;
+            color: $black;
+            @include os-light;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-top: 32px;
+            margin-bottom: 32px;
+        }
+    }
+}
+
+
+.contact {
+    background: $black;
+    padding: 120px 0;
+
+    h2 {
+        color: $white;
+        font-size: 18px; line-height: 28px;
+        @include os-light;
+        text-align: center;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        margin: 180px 0;
+    }
+    
+    a {
+        color: $white;
+        @include transition(color 0.5s);
+
+        &:hover {
+            color: $brown;
+        }
+    }
+
+    h3 {
+        color: $white;
+        font-size: 14px; line-height: 18px;
+        @include os-light;
+        text-align: center;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+    }
+}
+
+#supersized {
+    @include opacity(0.0);
+    visibility: visible;
+}
